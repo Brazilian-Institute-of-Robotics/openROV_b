@@ -15,25 +15,27 @@ class camera(object):
         
         self.bridge_object = CvBridge()
         self.image_sub = rp.Subscriber("/rexrov/rexrov/camera/camera_image", Image, self.camera_callback)
-        cv_image = 0
+        self.close = False
+
 
     def camera_callback(self,data):
         try:
             cv_image = self.bridge_object.imgmsg_to_cv2(data, desired_encoding="bgr8")
+            cv2.imshow("Image window", cv_image)
+            cv2.waitKey(1)
+
         except CvBridgeError as e:
-            print(e)
+            self.close = True
+            rp.logfatal(e)
     
-    cv2.imshow("Image window", cv_image)
-    cv2.waitKey(1)
 
 def main():
 
     rexrov_camera = camera()
-    rp.init_node("Camera node",anonymous=True)
-    try:
+    rp.init_node("camera_node",anonymous=True)
+    while(not rp.is_shutdown()):
         rp.spin()
-    except KeyboardInterrupt:
-        print("Shutting down")  
+
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
