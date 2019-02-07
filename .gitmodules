@@ -1,0 +1,4 @@
+[submodule "opencv"]
+	url = https://github.com/opencv/opencv
+[submodule "uuv_simulator"]
+	url = https://github.com/uuvsimulator/uuv_simulator
