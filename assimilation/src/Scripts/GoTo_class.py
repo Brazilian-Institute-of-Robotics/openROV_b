@@ -73,9 +73,9 @@ class GoTo:
         if error_z > self.distance_tolerance or error_z < -self.distance_tolerance:
             speed.linear.z = error_z
             if error_z > 1:
-                speed.linear.z = .5
+                speed.linear.z = 1
             elif error_z < -1:
-                speed.linear.z = -.5
+                speed.linear.z = -1
         else:
             speed.linear.z = 0
 
