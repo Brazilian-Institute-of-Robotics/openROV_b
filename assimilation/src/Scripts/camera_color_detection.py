@@ -21,7 +21,7 @@ class camera(object):
     def camera_callback(self,data):
         try:
             cv_image = self.bridge_object.imgmsg_to_cv2(data, desired_encoding="bgr8")
-            cv2.imshow("Image window", cv_image)
+            cv2.imshow("Rexrov camera", cv_image)
             cv2.waitKey(1)
 
         except CvBridgeError as e:
