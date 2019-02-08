@@ -14,18 +14,25 @@ class color_ident():
 
     def __init__(self):
         self.start = camera.launch()
-        self.descentre = 160
-        self.rows_to_watch = 20
         
-
     def convert_to_HSV(self):
         
         self.hsv = cv2.cvtColor(self.start.cv_image, cv2.COLOR_BGR2HSV)
-        self.lower_yellow = numpy.array([])
+        self.lower_blue = numpy.array([255,0,0])
+        self.upper_blue = numpy.array([255,51,51])
+    
+    def apply_mask(self):
 
+        self.mask = cv2.inRange(self.hsv, self.upper_blue, self.lower_blue)
+        self.res = cv2.bitwise_and(self.start.cv_image,self.start.cv_image, mask=self.mask)
+        
     def show_img(self):
         img = self.start.get()
+        rospy.loginfo_throttle(60,"Camera started")
         cv2.imshow("Rexrov camera", img)
+        cv2.imshow("HSV",self.hsv)
+        cv2.imshow("Mask", self.mask)
+        cv2.imshow("Res", self.res)
         cv2.waitKey(3)
         
 def main():
@@ -37,8 +44,9 @@ def main():
 
         if(run.start.is_ready()):
 
-            run.show_img()
             run.convert_to_HSV()
+            run.apply_mask()
+            run.show_img()
 
     cv2.destroyAllWindows()
 
