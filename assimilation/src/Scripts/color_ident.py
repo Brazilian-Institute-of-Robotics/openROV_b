@@ -2,8 +2,8 @@
 
 import roslib
 import cv2
-import numpy as np 
-import rospy as rp
+import numpy 
+import rospy 
 from cv_bridge import CvBridge, CvBridgeError
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image
@@ -20,8 +20,8 @@ class color_ident():
 
     def convert_to_HSV(self):
         
-        hsv = cv2.cvtColor(self.start.cv_image, cv2.COLOR_BGR2HSV)
-        print(hsv)
+        self.hsv = cv2.cvtColor(self.start.cv_image, cv2.COLOR_BGR2HSV)
+        self.lower_yellow = numpy.array([])
 
     def show_img(self):
         img = self.start.get()
@@ -30,12 +30,16 @@ class color_ident():
         
 def main():
     
-    rp.init_node("camera_node",anonymous=True)
+    rospy.init_node("camera_node",anonymous=True)
     run = color_ident()
-    while(not rp.is_shutdown()):
+
+    while(not rospy.is_shutdown()):
+
         if(run.start.is_ready()):
+
             run.show_img()
             run.convert_to_HSV()
+
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
