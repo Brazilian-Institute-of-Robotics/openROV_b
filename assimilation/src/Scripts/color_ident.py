@@ -18,14 +18,14 @@ class color_ident():
     def convert_to_HSV(self):
         
         self.hsv = cv2.cvtColor(self.start.cv_image, cv2.COLOR_BGR2HSV)
-        self.lower_blue = numpy.array([255,0,0])
-        self.upper_blue = numpy.array([255,51,51])
+        self.lower_blue = numpy.array([110,50,50])
+        self.upper_blue = numpy.array([130,255,255])
     
     def apply_mask(self):
 
-        self.mask = cv2.inRange(self.hsv, self.upper_blue, self.lower_blue)
+        self.mask = cv2.inRange(self.hsv, self.lower_blue, self.upper_blue)
         self.res = cv2.bitwise_and(self.start.cv_image,self.start.cv_image, mask=self.mask)
-        
+
     def show_img(self):
         img = self.start.get()
         rospy.loginfo_throttle(60,"Camera started")
