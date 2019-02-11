@@ -14,7 +14,7 @@ class color_ident():
 
     def __init__(self):
         self.start = camera.launch()
-        
+    
     def convert_to_HSV(self):
         
         self.hsv = cv2.cvtColor(self.start.cv_image, cv2.COLOR_BGR2HSV)
