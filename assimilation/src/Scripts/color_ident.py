@@ -5,8 +5,6 @@ import cv2
 import numpy 
 import rospy 
 from cv_bridge import CvBridge, CvBridgeError
-from geometry_msgs.msg import Twist
-from sensor_msgs.msg import Image
 import camera
 
 
