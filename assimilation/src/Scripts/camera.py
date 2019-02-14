@@ -8,7 +8,7 @@ from cv_bridge import CvBridge, CvBridgeError
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image
 
-class launch(object):
+class Launch():
 
     def __init__(self):
         

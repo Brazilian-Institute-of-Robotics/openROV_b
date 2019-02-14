@@ -4,14 +4,13 @@ import roslib
 import cv2
 import numpy 
 import rospy 
-from cv_bridge import CvBridge, CvBridgeError
 import camera
 
 
 class color_ident():
 
     def __init__(self):
-        self.start = camera.launch()
+        self.start = camera.Launch()
     
     def convert_to_HSV(self):
         
