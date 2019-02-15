@@ -1,26 +1,54 @@
-#! usr/bin/dev python
+#!/usr/bin/env python
 
 import rospy
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist, Vector3
 from sensor_msgs.msg import Joy
 
+class Joystick_control():
+
+    def __init__(self):
         
-def joy_callback(data):
+        self.joy_sub = rospy.Subscriber("joy", Joy, self.joy_callback)
+        self.cmd_pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
+        self.linear = Vector3(0,0,0)
+        self.angular = Vector3(0,0,0)
+        self.deadman = 0
+    
+    def joy_callback(self,data):
 
-    twist = Twist()
-    twist.linear.x = 4*data.axes[7]
-    twist.angular.z = 4*data.axes[6]
-    cmd_pub.publish(twist)
+        self.angular.z = data.axes[0]
+        self.linear.x = data.axes[1]
+        self.linear.y = data.axes[2]
+        self.linear.z = data.axes[3]
+        self.deadman = data.buttons[5]
 
+    def control(self):
+        
+        ctrl = Twist()
+
+        if self.deadman != -1:
+            ctrl.linear = self.linear
+            ctrl.angular = self.angular
+
+        else:
+            ctrl.linear = Vector3(0,0,0)
+            ctrl.angular = Vector3(0,0,0)
+        
+        self.cmd_pub.publish(ctrl)
+    
 def start():
+    run= Joystick_control()
 
-    global cmd_pub
+    rospy.init_node('Joy_controller', anonymous=True)
+    
+    while(not rospy.is_shutdown()):
+        run.control()
 
-    joy_sub = rospy.Subscriber("joy", Joy, joy_callback)
-    cmd_pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
-    rospy.init_node('Joy_controller')
-    rospy.spin()
+
         
+
+if __name__ == "__main__":
+    start()    
 
 
 
