@@ -22,7 +22,7 @@
       <remap from="cmd_accel" to="/$(arg uuv_name)/cmd_accel"/>
     </node>
     
-    <node pkg="assimilation" type="GoTo_class.py" name="GoTo" ns="/$(arg uuv_name)" />
+    <node pkg="assimilation" type="joystick.py" name="joystick" ns="/$(arg uuv_name)" />
   </group>
 
 </launch>
