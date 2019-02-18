@@ -24,9 +24,10 @@ class color_ident():
         self.frame_markers = aruco.drawDetectedMarkers(self.start.cv_image, corners, ids)
 
     def show_img(self):
-
+        img = self.start.get()
         rospy.loginfo_throttle(60,"Camera started")
         cv2.imshow("Tag ident", self.frame_markers)
+        cv2.imshow("Rexrov Camera", img)
         cv2.waitKey(3)
         
 def main():
