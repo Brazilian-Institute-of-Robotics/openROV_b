@@ -16,10 +16,10 @@ class Joystick_control():
     
     def joy_callback(self,data):
 
-        self.angular.z = data.axes[0]
-        self.linear.x = data.axes[1]
-        self.linear.y = data.axes[2]
-        self.linear.z = data.axes[3]
+        self.angular.z = data.axes[0]*.5
+        self.linear.x = data.axes[1]*.5
+        self.linear.y = data.axes[2]*.5
+        self.linear.z = data.axes[3]*.5
         self.deadman = data.buttons[5]
 
     def control(self):

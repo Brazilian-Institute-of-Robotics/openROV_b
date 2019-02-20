@@ -27,9 +27,8 @@ class color_ident():
         img = self.start.get()
         rospy.loginfo_throttle(60,"Camera started")
         cv2.imshow("Rexrov camera", img)
-        cv2.imshow("HSV",self.hsv)
-        cv2.imshow("Mask", self.mask)
-        cv2.imshow("Res", self.res)
+        cv2.imshow("Res camera",self.res)
+
         cv2.waitKey(3)
         
 def main():
