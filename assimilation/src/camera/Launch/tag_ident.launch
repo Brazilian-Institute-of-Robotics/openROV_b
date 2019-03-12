@@ -25,6 +25,8 @@
     <node pkg="assimilation" type="GoTo_class.py" name="GoTo" ns="/$(arg uuv_name)" />
 
     <node pkg="assimilation" type="tag_ident.py" name="Tag" ns="/$(arg uuv_name)"/>
+
+    <node pkg="assimilation" type="joystick.py" name="joystick_control" ns="/$(arg uuv_name)"/>
   </group>
 
 </launch>
