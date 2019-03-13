@@ -26,13 +26,10 @@ class Joystick_control():
         
         ctrl = Twist()
 
-        if self.deadman != -1:
+        if self.deadman != 1:
             ctrl.linear = self.linear
             ctrl.angular = self.angular
 
-        else:
-            ctrl.linear = Vector3(0,0,0)
-            ctrl.angular = Vector3(0,0,0)
         
         self.cmd_pub.publish(ctrl)
     

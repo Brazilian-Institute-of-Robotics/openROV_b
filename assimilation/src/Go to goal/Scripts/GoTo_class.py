@@ -15,9 +15,9 @@ class GoTo:
         self.real_pose = rospy.Subscriber('pose_gt', Odometry, self.update_position)
         #Publish to the cmd_vel to send the linear and angular robot's speed
         self.speed_pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
-        self.goal = [0,0,0]
-        self.pose = [0,0,0]
-        (self.roll, self.pitch, self.theta) = (0,0,0)
+        self.goal = [0, 0, -.5]
+        self.pose = [0, 0, 0]
+        (self.roll, self.pitch, self.theta) = (0, 0, 0)
         self.rotation = 0
         self.distance_tolerance = 0.05
         self.angle_tolerance = 0.005
