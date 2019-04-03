@@ -4,10 +4,10 @@ import rospy
 from geometry_msgs.msg import Twist, Vector3
 from sensor_msgs.msg import Joy
 
-class Joystick_control():
 
+class Joystick_control():
     def __init__(self):
-        
+
         self.joy_sub = rospy.Subscriber("joy", Joy, self.joy_callback)
         self.cmd_pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
         self.linear = Vector3(0,0,0)

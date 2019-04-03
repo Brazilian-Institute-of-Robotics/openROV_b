@@ -8,8 +8,6 @@ from sensor_msgs.msg import Image
 
 
 class Launch():
-
-
     def __init__(self):
 
         self.bridge_object = CvBridge()
