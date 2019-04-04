@@ -25,4 +25,6 @@
 
     <node pkg="assimilation" type="Pan_and_tilt_scan.py" name="Pan_tilt_scan" output="screen"/>
     
+    <node pkg="assimilation" type="img_recorder.py" name="img_recorder" />
+    
 </launch>
